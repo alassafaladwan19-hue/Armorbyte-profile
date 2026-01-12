@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArmorByte | Cybersecurity &amp; Development</title>
+    <meta name="description" content="ArmorByte provides cybersecurity services, penetration testing, SOC support, and full‑stack development.">
+    <link rel="icon" href="images/logo of armorbyte.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest" crossorigin="anonymous"></script>
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Orbitron:wght@500;700;900&amp;display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-blue: #2563eb;
+            --brand-dark: #0f172a;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Orbitron', sans-serif; }
+        
+        .hero-bg {
+            background-image: linear-gradient(to bottom right, #0f172a, #1e293b), 
+                              radial-gradient(circle at top right, #2563eb33, transparent);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.2);
+        }
+        /* Tab styling for QR section */
+        .qr-tab { cursor: pointer; padding: 4px 12px; font-size: 12px; border-radius: 999px; transition: all 0.2s; }
+        .qr-tab.active { background-color: #2563eb; color: white; }
+        .qr-tab.inactive { background-color: #f1f5f9; color: #64748b; }
+
+
+        /* Consistent team photos */
+        .team-photo { filter: grayscale(12%) contrast(1.05); }
+        .team-photo-wrap { background: linear-gradient(180deg, rgba(37,99,235,0.12), rgba(15,23,42,0)); }
+        @media print {
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Download Control -->
+    <div class="fixed top-24 right-4 z-50 no-print">
+        <button onclick="downloadHTML()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg flex items-center gap-2 transition-colors text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download" class="lucide lucide-download w-4 h-4"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg> Download Profile
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo Area -->
+                <div class="flex items-center gap-3">
+                    <img src="logo of armorbyte.png" alt="ArmorByte Logo" class="h-12 w-auto object-contain" onerror="this.src='https://via.placeholder.com/150x50?text=ArmorByte';">
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="#about" class="text-slate-600 hover:text-blue-600 font-medium text-sm">About</a>
+                    <a href="#services" class="text-slate-600 hover:text-blue-600 font-medium text-sm">Services</a>
+                    <a href="#methodology" class="text-slate-600 hover:text-blue-600 font-medium text-sm">Methodology</a>
+                    <a href="#why-us" class="text-slate-600 hover:text-blue-600 font-medium text-sm">Why Us</a>
+                    <a href="#team" class="text-slate-600 hover:text-blue-600 font-medium text-sm">Team</a>
+                    <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition text-sm">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg text-white py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200">
+                SECURE INNOVATION
+            </h1>
+            <p class="text-lg md:text-2xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed mb-8">
+                A dynamic Cybersecurity &amp; Fullstack Development firm based in Amman. We empower businesses to navigate the digital landscape securely while driving growth.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#services" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-bold transition flex items-center justify-center gap-2">
+                    Our Services <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-5 h-5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                </a>
+                <a href="#contact" class="bg-transparent border border-white/30 hover:bg-white/10 text-white px-8 py-3 rounded-lg font-bold transition">
+                    Get in Touch
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-sm font-bold mb-6">
+                        <span class="w-2 h-2 rounded-full bg-blue-600"></span> Who We Are
+                    </div>
+                    <h2 class="text-3xl font-bold mb-6 text-slate-900 brand-font">Guardians of the Digital Frontier</h2>
+                    
+                    <p class="text-slate-600 mb-6 leading-relaxed">
+                        ArmorByte Solutions is a dynamic firm based in Amman, Jordan. Our mission is to empower startups and SMEs with the tools needed to succeed securely.
+                    </p>
+                    
+                    <p class="text-slate-600 mb-6 leading-relaxed">
+                        <strong>Social Responsibility:</strong> Recognizing that sensitive data is often dangerously exposed, we undertake select cases on a <strong>Pro Bono basis</strong> to protect organizations contributing to the greater good. By securing these vulnerable sectors, we identify and mitigate critical vulnerabilities effectively.
+                    </p>
+
+                    <div class="p-4 bg-slate-50 border-l-4 border-blue-600 rounded-r-lg">
+                        <p class="italic text-slate-700 font-medium">"Our vision is to be your trusted partner in the ever-changing digital landscape, providing solutions that not only secure your presence but help you grow."</p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&amp;fit=crop&amp;q=80&amp;w=800" alt="About ArmorByte" class="rounded-2xl shadow-2xl w-full object-cover border border-slate-100" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&amp;fit=crop&amp;q=80&amp;w=800';">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 brand-font">What We Do</h2>
+                <p class="text-slate-500 mt-4">Comprehensive solutions for Security and Development.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Service 01: Cybersecurity -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 card-hover transition duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-alert" class="lucide lucide-shield-alert w-6 h-6"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-800">01. Cybersecurity</h3>
+                    </div>
+                    <p class="text-slate-600 mb-6">
+                        We are your dedicated guardians against digital threats. We help you build a strong digital fortress, ensuring resilience.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-sm text-slate-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-4 h-4 text-green-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Vulnerability Assessments &amp; Audits
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-4 h-4 text-green-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Penetration Testing (Black/White Box)
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-4 h-4 text-green-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Incident Response Planning
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-4 h-4 text-green-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> ISO 27001 Compliance Consulting
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 02: Fullstack Dev -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 card-hover transition duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="code-2" class="lucide lucide-code-2 w-6 h-6"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-800">02. Fullstack Development</h3>
+                    </div>
+                    <p class="text-slate-600 mb-6">
+                        Passionate about crafting user-friendly, secure, and innovative digital experiences for your clients and customers.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-sm text-slate-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-4 h-4 text-indigo-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Custom Web Development
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-4 h-4 text-indigo-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Mobile App Development
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-4 h-4 text-indigo-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> E-Commerce Solutions
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-4 h-4 text-indigo-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> Secure-by-Design Architecture
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-12 text-slate-900 brand-font">Our Security Methodology</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <!-- Step 1 -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
+                    <div class="w-10 h-10 bg-slate-900 rounded flex items-center justify-center mb-4 text-white font-bold">1</div>
+                    <h3 class="text-lg font-bold mb-2">Black Box Assessment</h3>
+                    <p class="text-slate-600 text-sm">
+                        Simulating real-world external attacks with zero access to identify outside threats.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-blue-200 ring-2 ring-blue-100">
+                    <div class="w-10 h-10 bg-blue-600 rounded flex items-center justify-center mb-4 text-white font-bold">2</div>
+                    <h3 class="text-lg font-bold mb-2 text-blue-700">Proprietary Automation</h3>
+                    <p class="text-slate-600 text-sm">
+                        Deploying custom Python/Netmiko engines to bridge manual testing and continuous monitoring.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
+                    <div class="w-10 h-10 bg-indigo-600 rounded flex items-center justify-center mb-4 text-white font-bold">3</div>
+                    <h3 class="text-lg font-bold mb-2">White Box Audit</h3>
+                    <p class="text-slate-600 text-sm">
+                        Using administrative access for deep-dive configuration audits to find hidden flaws.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="why-us" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-600 rounded-full blur-3xl opacity-20"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold brand-font">Why Choose ArmorByte?</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6">
+                    <div class="mx-auto w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-4 text-blue-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="award" class="lucide lucide-award w-8 h-8"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Expertise</h3>
+                    <p class="text-slate-400 text-sm">Seasoned professionals with deep expertise in both cybersecurity and fullstack development.</p>
+                </div>
+                <div class="p-6">
+                    <div class="mx-auto w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-4 text-blue-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sliders" class="lucide lucide-sliders w-8 h-8"><path d="M10 8h4"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M17 16h4"></path><path d="M19 12V3"></path><path d="M19 21v-5"></path><path d="M3 14h4"></path><path d="M5 10V3"></path><path d="M5 21v-7"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Tailored Solutions</h3>
+                    <p class="text-slate-400 text-sm">We understand every business is unique. We tailor our services to meet your specific challenges.</p>
+                </div>
+                <div class="p-6">
+                    <div class="mx-auto w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-4 text-blue-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="zap" class="lucide lucide-zap w-8 h-8"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Innovation</h3>
+                    <p class="text-slate-400 text-sm">We believe innovation and security go hand in hand, staying at the forefront of technology.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 brand-font">Our Experts</h2>
+                <p class="text-slate-500 mt-4">The team dedicated to your digital safety.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Member 1: Ayham (CEO/Founder) -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 hover:border-blue-500 transition duration-300 group shadow-lg">
+                    <div class="w-24 h-24 mx-auto bg-slate-100 rounded-full mb-4 overflow-hidden border-2 border-slate-200 group-hover:border-blue-500 transition">
+                         <img src="ayham.png" alt="Ayham Alhalabi" class="w-full h-full object-cover team-photo" onerror="this.src='https://ui-avatars.com/api/?name=Ayham+Alhalabi&amp;background=334155&amp;color=fff&amp;size=150';">
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg font-bold text-slate-900">Ayham Al-Halabi</h3>
+                        <p class="text-blue-600 text-xs font-bold uppercase mb-4">CEO / Founder</p>
+                        <div class="flex justify-center gap-3">
+                            <a href="https://www.linkedin.com/in/ayhamalhalabi/" class="text-slate-400 hover:text-blue-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="linkedin" class="lucide lucide-linkedin w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                            <a href="mailto:ayham.alhalabi10@gmail.com" class="text-slate-400 hover:text-blue-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" class="lucide lucide-mail w-5 h-5"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 2: Amer (Head of Cybersecurity) -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 hover:border-blue-500 transition duration-300 group shadow-lg">
+                    <div class="w-24 h-24 mx-auto bg-slate-100 rounded-full mb-4 overflow-hidden border-2 border-slate-200 group-hover:border-blue-500 transition">
+                        <img src="amer.jpg" alt="Amer Al-Assaf" class="w-full h-full object-cover team-photo" onerror="this.src='https://ui-avatars.com/api/?name=Amer+Al-Assaf&amp;background=0D8ABC&amp;color=fff&amp;size=150';">
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg font-bold text-slate-900">Amer Al-Assaf</h3>
+                        <p class="text-blue-600 text-xs font-bold uppercase mb-4">Head of Cybersecurity</p>
+                        <div class="flex justify-center gap-3">
+                            <a href="https://www.linkedin.com/in/amer-alassaf-51a786302/" class="text-slate-400 hover:text-blue-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="linkedin" class="lucide lucide-linkedin w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                            <a href="mailto:alassafamer143@gmail.com" class="text-slate-400 hover:text-blue-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" class="lucide lucide-mail w-5 h-5"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 3: Shaheen (Offensive Security Engineer) -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 hover:border-blue-500 transition duration-300 group shadow-lg">
+                    <div class="w-24 h-24 mx-auto bg-slate-100 rounded-full mb-4 overflow-hidden border-2 border-slate-200 group-hover:border-blue-500 transition">
+                         <img src="shaheen.jpg" alt="Shaheen Alsadiq" class="w-full h-full object-cover team-photo" onerror="this.src='https://ui-avatars.com/api/?name=Shaheen+Alsadiq&amp;background=334155&amp;color=fff&amp;size=150';">
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg font-bold text-slate-900">Shaheen Al-Sadiq</h3>
+                        <p class="text-blue-600 text-xs font-bold uppercase mb-4">Offensive Security Engineer</p>
+                        <div class="flex justify-center gap-3">
+                            <a href="https://www.linkedin.com/in/shaheen-al-sadiq-98a677365/" class="text-slate-400 hover:text-blue-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="linkedin" class="lucide lucide-linkedin w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                            <a href="mailto:sshahen107@gmail.com" class="text-slate-400 hover:text-blue-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" class="lucide lucide-mail w-5 h-5"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 4: Ahmad (SOC Engineer) -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 hover:border-blue-500 transition duration-300 group shadow-lg">
+                    <div class="w-24 h-24 mx-auto bg-slate-100 rounded-full mb-4 overflow-hidden border-2 border-slate-200 group-hover:border-blue-500 transition">
+                         <img src="https://ui-avatars.com/api/?name=Ahmad+Qutait&amp;background=334155&amp;color=fff&amp;size=150" alt="Ahmad Qutait" class="w-full h-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=Ahmad+Qutait&amp;background=334155&amp;color=fff&amp;size=150';">
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-lg font-bold text-slate-900">Ahmad Qutait</h3>
+                        <p class="text-blue-600 text-xs font-bold uppercase mb-4">SOC Engineer</p>
+                        <div class="flex justify-center gap-3">
+                            <a href="#" class="text-slate-400 hover:text-blue-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="linkedin" class="lucide lucide-linkedin w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                            <a href="mailto:Zoozktait@gmail.com" class="text-slate-400 hover:text-blue-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" class="lucide lucide-mail w-5 h-5"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer id="contact" class="bg-slate-950 text-slate-400 py-16 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                
+                <!-- Brand -->
+                <div>
+                    <img src="images/logo.png" alt="ArmorByte" class="h-16 mb-4 opacity-90" onerror="this.style.display='none';">
+                    <h3 class="text-2xl font-bold text-white mb-4 brand-font">ArmorByte</h3>
+                    <p class="text-sm mb-6 max-w-sm leading-relaxed">
+                        Your trusted partner for cybersecurity and full‑stack development—secure by design, built for scale.
+                    </p>
+                    <p class="text-xs text-slate-500">© <span id="year"></span> ArmorByte. All rights reserved.</p>
+                </div>
+                 
+
+                <!-- Contact -->
+                <div class="flex flex-col gap-6">
+                    <div>
+                        <h4 class="text-white font-bold mb-2">Connect with us</h4>
+                        <a href="tel:+962788883351" class="text-lg block hover:text-blue-400 transition mb-1">+962 78 888 3351</a>
+                        <a href="mailto:ArmorByte@gmail.com" class="text-lg block hover:text-blue-400 transition">ArmorByte@gmail.com</a>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-2">Location</h4>
+                        <p class="text-sm">Amman, Jordan</p>
+                    </div>
+                </div>
+
+                <!-- QR Code (Added) -->
+                <div class="flex flex-col items-center md:items-end">
+                    <div class="flex items-center gap-2 mb-4 bg-slate-900 p-1 rounded-full">
+                        <span onclick="setQrMode('site')" id="tab-site" class="qr-tab active">View Site</span>
+                        <span onclick="setQrMode('contact')" id="tab-contact" class="qr-tab inactive">Save Contact</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg shadow-lg">
+                        <div id="qrcode" title="https://github.com"><canvas width="128" height="128" style="display: none;"></canvas><img src="data:image/png;base64,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" style="display: block;"></div>
+                    </div>
+                    <p id="qr-desc" class="text-xs text-center mt-2 text-slate-500">Scan to visit profile</p>
+                </div>
+
+            </div>
+            <div class="border-t border-slate-900 mt-12 pt-8 text-center text-xs text-slate-600">
+                © 2024 ArmorByte Solutions. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // =========================================================================
+        // CONFIGURATION: Set this if you want the QR code to work BEFORE you host it.
+        // Example: const MANUAL_URL = "https://yourusername.github.io/armorbyte-profile";
+        // If left empty (""), it will try to detect where it is currently hosted.
+        const MANUAL_URL = ""; 
+        // =========================================================================
+
+        function downloadHTML() {
+            const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], {type: 'text/html'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            // Changed to index.html for easier hosting
+            a.download = 'index.html'; 
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // QR Code Logic
+        let qrcodeObj = null;
+
+        function getLiveUrl() {
+            // Priority 1: Manual override (for printing before hosting)
+            if (MANUAL_URL && MANUAL_URL.length > 5) return MANUAL_URL;
+            
+            // Priority 2: Detected URL (if online)
+            if (window.location.protocol.startsWith('http')) {
+                return window.location.href;
+            }
+
+            // Priority 3: Local file detection (show warning in console/QR)
+            return "https://github.com"; // Fallback to GitHub main page so QR doesn't break
+        }
+
+        function generateQR(text) {
+            const container = document.getElementById("qrcode");
+            container.innerHTML = ""; // Clear previous
+            qrcodeObj = new QRCode(container, {
+                text: text,
+                width: 128,
+                height: 128,
+                colorDark : "#0f172a",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.M
+            });
+        }
+
+        function setQrMode(mode) {
+            const tabSite = document.getElementById('tab-site');
+            const tabContact = document.getElementById('tab-contact');
+            const desc = document.getElementById('qr-desc');
+            const currentUrl = getLiveUrl();
+
+            // Check if local file
+            if (window.location.protocol === 'file:' && !MANUAL_URL) {
+                if(mode === 'site') {
+                    desc.innerHTML = "<span class='text-red-500 font-bold'>Upload to Web First!</span>";
+                    // Still generate a dummy QR so layout doesn't break
+                    generateQR("https://armorbyte.com"); 
+                    return;
+                }
+            }
+
+            if (mode === 'site') {
+                tabSite.className = 'qr-tab active';
+                tabContact.className = 'qr-tab inactive';
+                desc.textContent = "Scan to visit profile";
+                generateQR(currentUrl);
+            } else {
+                tabSite.className = 'qr-tab inactive';
+                tabContact.className = 'qr-tab active';
+                desc.textContent = "Scan to save contact";
+                
+                const vCard = `BEGIN:VCARD
+VERSION:3.0
+FN:ArmorByte Solutions
+ORG:ArmorByte Solutions
+TITLE:Cybersecurity & Fullstack Development
+TEL;TYPE=WORK,VOICE:+962788883351
+EMAIL;TYPE=WORK:ArmorByte@gmail.com
+ADR;TYPE=WORK:;;Amman;;;Jordan
+URL:${currentUrl}
+NOTE:Securing Innovation.
+END:VCARD`;
+                generateQR(vCard);
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            setQrMode('site');
+        });
+    
+        // Footer year
+        const yEl = document.getElementById('year');
+        if (yEl) yEl.textContent = new Date().getFullYear();
+</script>
+
+</body></html>
