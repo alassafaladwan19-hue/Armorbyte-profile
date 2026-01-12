@@ -43,13 +43,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800">
 
-    <!-- Download Control -->
-    <div class="fixed top-24 right-4 z-50 no-print">
-        <button onclick="downloadHTML()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg flex items-center gap-2 transition-colors text-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download" class="lucide lucide-download w-4 h-4"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg> Download Profile
-        </button>
-    </div>
-
+  
     <!-- Navigation -->
     <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -440,7 +434,7 @@
                 if(mode === 'site') {
                     desc.innerHTML = "<span class='text-red-500 font-bold'>Upload to Web First!</span>";
                     // Still generate a dummy QR so layout doesn't break
-                    generateQR("https://armorbyte.com"); 
+                    generateQR("https://alassafaladwan19-hue.github.io/Armorbyte-profile/"); 
                     return;
                 }
             }
