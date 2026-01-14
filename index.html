@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArmorByte | Cybersecurity &amp; Development</title>
     <meta name="description" content="ArmorByte provides cybersecurity services, penetration testing, SOC support, and full‑stack development.">
-    <link rel="icon" href="images/logo of armorbyte.png">
+    <link rel="icon" href="logo of armorbyte.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest" crossorigin="anonymous"></script>
-    <!-- QR Code Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Orbitron:wght@500;700;900&amp;display=swap" rel="stylesheet">
     <style>
@@ -43,18 +42,11 @@
 </head>
 <body class="bg-slate-50 text-slate-800">
 
-  
-    <!-- Navigation -->
-    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+   <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Increased height from h-20 to h-28 to accommodate larger logo -->
-            <div class="flex justify-between h-28 items-center">
-                <!-- Logo Area -->
-                <div class="flex items-center gap-3">
-                    <!-- Increased height from h-12 to h-24 -->
+            <div class="flex justify-between h-24 items-center"> <div class="flex items-center gap-3">
                     <img src="logo of armorbyte.png" alt="ArmorByte Logo" class="h-24 w-auto object-contain" onerror="this.src='https://via.placeholder.com/150x50?text=ArmorByte';">
                 </div>
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
                     <a href="#about" class="text-slate-600 hover:text-blue-600 font-medium text-sm">About</a>
                     <a href="#services" class="text-slate-600 hover:text-blue-600 font-medium text-sm">Services</a>
@@ -67,7 +59,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header class="hero-bg text-white py-24 relative overflow-hidden">
         <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -77,10 +68,17 @@
             <p class="text-lg md:text-2xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed mb-8">
                 A dynamic Cybersecurity &amp; Fullstack Development firm based in Amman. We empower businesses to navigate the digital landscape securely while driving growth.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4 flex-wrap">
                 <a href="#services" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-bold transition flex items-center justify-center gap-2">
                     Our Services <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-5 h-5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                 </a>
+                
+                <a href="report.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-bold transition flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(79,70,229,0.5)] border border-indigo-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/></svg>
+                    Client Dashboard
+                </a>
+
                 <a href="#contact" class="bg-transparent border border-white/30 hover:bg-white/10 text-white px-8 py-3 rounded-lg font-bold transition">
                     Get in Touch
                 </a>
@@ -88,7 +86,6 @@
         </div>
     </header>
 
-    <!-- About Section -->
     <section id="about" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -117,7 +114,6 @@
         </div>
     </section>
 
-    <!-- Services Section -->
     <section id="services" class="py-20 bg-slate-50 border-y border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -126,7 +122,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Service 01: Cybersecurity -->
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 card-hover transition duration-300">
                     <div class="flex items-center gap-4 mb-6">
                         <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
@@ -153,7 +148,6 @@
                     </ul>
                 </div>
 
-                <!-- Service 02: Fullstack Dev -->
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 card-hover transition duration-300">
                     <div class="flex items-center gap-4 mb-6">
                         <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600">
@@ -183,13 +177,11 @@
         </div>
     </section>
 
-    <!-- Methodology Section -->
     <section id="methodology" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-bold mb-12 text-slate-900 brand-font">Our Security Methodology</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                <!-- Step 1 -->
                 <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
                     <div class="w-10 h-10 bg-slate-900 rounded flex items-center justify-center mb-4 text-white font-bold">1</div>
                     <h3 class="text-lg font-bold mb-2">Black Box Assessment</h3>
@@ -198,7 +190,6 @@
                     </p>
                 </div>
 
-                <!-- Step 2 -->
                 <div class="bg-slate-50 p-6 rounded-xl border border-blue-200 ring-2 ring-blue-100">
                     <div class="w-10 h-10 bg-blue-600 rounded flex items-center justify-center mb-4 text-white font-bold">2</div>
                     <h3 class="text-lg font-bold mb-2 text-blue-700">Proprietary Automation</h3>
@@ -207,7 +198,6 @@
                     </p>
                 </div>
 
-                <!-- Step 3 -->
                 <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
                     <div class="w-10 h-10 bg-indigo-600 rounded flex items-center justify-center mb-4 text-white font-bold">3</div>
                     <h3 class="text-lg font-bold mb-2">White Box Audit</h3>
@@ -219,7 +209,6 @@
         </div>
     </section>
 
-    <!-- Why Choose Us -->
     <section id="why-us" class="py-20 bg-slate-900 text-white relative overflow-hidden">
         <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-600 rounded-full blur-3xl opacity-20"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -253,7 +242,6 @@
         </div>
     </section>
 
-    <!-- Team Section -->
     <section id="team" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -262,7 +250,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Member 1: Ayham (CEO/Founder) -->
                 <div class="bg-white rounded-2xl p-6 border border-slate-100 hover:border-blue-500 transition duration-300 group shadow-lg">
                     <div class="w-24 h-24 mx-auto bg-slate-100 rounded-full mb-4 overflow-hidden border-2 border-slate-200 group-hover:border-blue-500 transition">
                          <img src="Ayham.png" alt="Ayham Alhalabi" class="w-full h-full object-cover team-photo" onerror="this.src='https://ui-avatars.com/api/?name=Ayham+Alhalabi&amp;background=334155&amp;color=fff&amp;size=150';">
@@ -277,7 +264,6 @@
                     </div>
                 </div>
 
-                <!-- Member 2: Amer (Head of Cybersecurity) -->
                 <div class="bg-white rounded-2xl p-6 border border-slate-100 hover:border-blue-500 transition duration-300 group shadow-lg">
                     <div class="w-24 h-24 mx-auto bg-slate-100 rounded-full mb-4 overflow-hidden border-2 border-slate-200 group-hover:border-blue-500 transition">
                         <img src="amer.jpg" alt="Amer Al-Assaf" class="w-full h-full object-cover team-photo" onerror="this.src='https://ui-avatars.com/api/?name=Amer+Al-Assaf&amp;background=0D8ABC&amp;color=fff&amp;size=150';">
@@ -292,7 +278,6 @@
                     </div>
                 </div>
 
-                <!-- Member 3: Shaheen (Offensive Security Engineer) -->
                 <div class="bg-white rounded-2xl p-6 border border-slate-100 hover:border-blue-500 transition duration-300 group shadow-lg">
                     <div class="w-24 h-24 mx-auto bg-slate-100 rounded-full mb-4 overflow-hidden border-2 border-slate-200 group-hover:border-blue-500 transition">
                          <img src="Shaheen.png" alt="Shaheen Alsadiq" class="w-full h-full object-cover team-photo" onerror="this.src='https://ui-avatars.com/api/?name=Shaheen+Alsadiq&amp;background=334155&amp;color=fff&amp;size=150';">
@@ -307,7 +292,6 @@
                     </div>
                 </div>
 
-                <!-- Member 4: Ahmad (SOC Engineer) -->
                 <div class="bg-white rounded-2xl p-6 border border-slate-100 hover:border-blue-500 transition duration-300 group shadow-lg">
                     <div class="w-24 h-24 mx-auto bg-slate-100 rounded-full mb-4 overflow-hidden border-2 border-slate-200 group-hover:border-blue-500 transition">
                          <img src="Ahmad.jpeg" alt="Ahmad Qutait" class="w-full h-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=Ahmad+Qutait&amp;background=334155&amp;color=fff&amp;size=150';">
@@ -324,14 +308,12 @@
             </div>
         </div>
     </section>
-    <!-- Footer -->
     <footer id="contact" class="bg-slate-950 text-slate-400 py-16 border-t border-slate-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                 
-                <!-- Brand -->
                 <div>
-                    <img src="images/logo.png" alt="ArmorByte" class="h-16 mb-4 opacity-90" onerror="this.style.display='none';">
+                    <img src="logo of armorbyte.png" alt="ArmorByte" class="h-16 mb-4 opacity-90" onerror="this.style.display='none';">
                     <h3 class="text-2xl font-bold text-white mb-4 brand-font">ArmorByte</h3>
                     <p class="text-sm mb-6 max-w-sm leading-relaxed">
                         Your trusted partner for cybersecurity and full‑stack development—secure by design, built for scale.
@@ -340,7 +322,6 @@
                 </div>
                   
 
-                <!-- Contact -->
                 <div class="flex flex-col gap-6">
                     <div>
                         <h4 class="text-white font-bold mb-2">Connect with us</h4>
@@ -353,7 +334,6 @@
                     </div>
                 </div>
 
-                <!-- QR Code (Added) -->
                 <div class="flex flex-col items-center md:items-end">
                     <div class="flex items-center gap-2 mb-4 bg-slate-900 p-1 rounded-full">
                         <span onclick="setQrMode('site')" id="tab-site" class="qr-tab active">View Site</span>
@@ -367,7 +347,7 @@
 
             </div>
             <div class="border-t border-slate-900 mt-12 pt-8 text-center text-xs text-slate-600">
-                © 2024 ArmorByte Solutions. All Rights Reserved.
+                © 2025 ArmorByte Solutions. All Rights Reserved.
             </div>
         </div>
     </footer>
@@ -436,7 +416,7 @@
                 if(mode === 'site') {
                     desc.innerHTML = "<span class='text-red-500 font-bold'>Upload to Web First!</span>";
                     // Still generate a dummy QR so layout doesn't break
-                    generateQR("https://alassafaladwan19-hue.github.io/Armorbyte-profile/"); 
+                    generateQR("https://armorbyte.com"); 
                     return;
                 }
             }
@@ -470,11 +450,10 @@ END:VCARD`;
         window.addEventListener('load', () => {
             setQrMode('site');
         });
-        
+    
         // Footer year
         const yEl = document.getElementById('year');
         if (yEl) yEl.textContent = new Date().getFullYear();
 </script>
 
-</body>
-</html>
+</body></html>
