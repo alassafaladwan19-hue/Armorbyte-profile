@@ -29,6 +29,10 @@
             --success: #059669;
         }
         
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
@@ -36,19 +40,22 @@
             color: var(--text-main);
         }
 
-        /* --- SIDEBAR --- */
+        /* --- LAYOUT GRID --- */
         .dashboard-container {
             display: grid;
+            /* Default Desktop Layout */
             grid-template-columns: 260px 1fr;
             min-height: 100vh;
         }
 
+        /* --- SIDEBAR --- */
         .sidebar {
             background-color: var(--bg-panel);
             border-right: 1px solid var(--border-color);
             padding: 25px;
             display: flex;
             flex-direction: column;
+            z-index: 10;
         }
 
         .brand-container {
@@ -72,7 +79,7 @@
             height: auto;
         }
 
-        /* User Profile Section - Upper Left */
+        /* User Profile Section */
         .user-profile {
             padding: 15px 10px;
             background-color: #f9fafb;
@@ -103,13 +110,19 @@
         }
 
         /* --- MAIN CONTENT --- */
-        .main-content { padding: 30px; overflow-y: auto; }
+        .main-content { 
+            padding: 30px; 
+            overflow-y: auto; 
+            width: 100%;
+        }
 
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
+            flex-wrap: wrap; /* Allows wrapping on mobile */
+            gap: 15px;
         }
 
         h1 { margin: 0; font-weight: 700; font-size: 1.8rem; letter-spacing: -0.5px; color: var(--brand-shield); }
@@ -118,7 +131,8 @@
         /* --- CARDS & CHARTS GRID --- */
         .charts-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            /* Changed minmax to 300px to fit better on mobile */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin-bottom: 30px;
         }
@@ -130,6 +144,7 @@
             border: 1px solid var(--border-color);
             position: relative;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden; /* Ensures content doesn't spill */
         }
         
         /* Top accent line */
@@ -158,8 +173,10 @@
             background: var(--bg-panel);
             border-radius: 12px;
             border: 1px solid var(--border-color);
-            overflow: hidden;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            /* CRITICAL FIX: Allows table to scroll internally on mobile */
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch;
         }
         
         .table-header {
@@ -169,9 +186,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            min-width: 600px; /* Ensures header doesn't crush on scroll */
         }
 
-        table { width: 100%; border-collapse: collapse; }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            min-width: 800px; /* Forces table to keep shape and trigger scroll */
+        }
+
         th { 
             background-color: #f3f4f6; 
             color: var(--text-muted); 
@@ -197,6 +220,7 @@
             font-size: 0.75rem; 
             font-weight: 700; 
             display: inline-block;
+            white-space: nowrap;
         }
         .bg-critical { background: rgba(220, 38, 38, 0.1); color: var(--danger); border: 1px solid rgba(220, 38, 38, 0.2); }
         .bg-high { background: rgba(217, 119, 6, 0.1); color: var(--warning); border: 1px solid rgba(217, 119, 6, 0.2); }
@@ -212,9 +236,41 @@
             font-size: 0.85rem;
             background: #f3f4f6;
             font-weight: 600;
+            white-space: nowrap;
         }
 
         .mermaid { background: transparent; }
+
+        /* --- MOBILE RESPONSIVENESS FIX --- */
+        @media screen and (max-width: 768px) {
+            .dashboard-container {
+                display: flex;
+                flex-direction: column; /* Stacks Sidebar on top of Content */
+            }
+
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 15px;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr; /* Single column for charts */
+            }
+        }
     </style>
 </head>
 <body>
@@ -299,83 +355,85 @@
                 <span style="font-family:'Chakra Petch'; font-size:0.9rem; color:var(--text-muted); font-weight:600;">5 Items</span>
             </div>
             
-            <table>
-                <thead>
-                    <tr>
-                        <th width="25%">VULNERABILITY</th>
-                        <th width="10%">SEVERITY</th>
-                        <th width="10%">CVSS</th>
-                        <th width="15%">COST (JOD)</th>
-                        <th width="40%">MITIGATION STRATEGY</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <strong style="color:var(--brand-shield);">SMBv1 (EternalBlue)</strong><br>
-                            <span style="font-size:0.8em; color:var(--text-muted);">Asset: Core Server</span>
-                        </td>
-                        <td><span class="badge bg-critical">CRITICAL</span></td>
-                        <td style="font-family:'Chakra Petch'; color:var(--danger); font-weight:700;">9.8</td>
-                        <td><span class="cost-tag">0 - 140 JOD</span></td>
-                        <td>
-                            <span style="color:var(--text-main);">Apply MS17-010 patch. Block port 445.</span>
-                        </td>
-                    </tr>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="25%">VULNERABILITY</th>
+                            <th width="10%">SEVERITY</th>
+                            <th width="10%">CVSS</th>
+                            <th width="15%">COST (JOD)</th>
+                            <th width="40%">MITIGATION STRATEGY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong style="color:var(--brand-shield);">SMBv1 (EternalBlue)</strong><br>
+                                <span style="font-size:0.8em; color:var(--text-muted);">Asset: Core Server</span>
+                            </td>
+                            <td><span class="badge bg-critical">CRITICAL</span></td>
+                            <td style="font-family:'Chakra Petch'; color:var(--danger); font-weight:700;">9.8</td>
+                            <td><span class="cost-tag">0 - 140 JOD</span></td>
+                            <td>
+                                <span style="color:var(--text-main);">Apply MS17-010 patch. Block port 445.</span>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                            <strong style="color:var(--brand-shield);">Weak Wi-Fi (PSK)</strong><br>
-                            <span style="font-size:0.8em; color:var(--text-muted);">Asset: Staff WLAN</span>
-                        </td>
-                        <td><span class="badge bg-medium">MEDIUM</span></td>
-                        <td style="font-family:'Chakra Petch'; color:var(--brand-circuit); font-weight:700;">6.5</td>
-                        <td><span class="cost-tag">700 - 1,800 JOD</span></td>
-                        <td>
-                            <span style="color:var(--text-main);">Migrate to WPA2-Enterprise with RADIUS.</span>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <strong style="color:var(--brand-shield);">Weak Wi-Fi (PSK)</strong><br>
+                                <span style="font-size:0.8em; color:var(--text-muted);">Asset: Staff WLAN</span>
+                            </td>
+                            <td><span class="badge bg-medium">MEDIUM</span></td>
+                            <td style="font-family:'Chakra Petch'; color:var(--brand-circuit); font-weight:700;">6.5</td>
+                            <td><span class="cost-tag">700 - 1,800 JOD</span></td>
+                            <td>
+                                <span style="color:var(--text-main);">Migrate to WPA2-Enterprise with RADIUS.</span>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                            <strong style="color:var(--brand-shield);">No MFA on Admin</strong><br>
-                            <span style="font-size:0.8em; color:var(--text-muted);">Asset: VPN Gateway</span>
-                        </td>
-                        <td><span class="badge bg-high">HIGH</span></td>
-                        <td style="font-family:'Chakra Petch'; color:var(--warning); font-weight:700;">8.8</td>
-                        <td><span class="cost-tag">350 - 1,000 JOD</span></td>
-                        <td>
-                            <span style="color:var(--text-main);">Enforce MFA (Duo/Google Auth) for admins.</span>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <strong style="color:var(--brand-shield);">No MFA on Admin</strong><br>
+                                <span style="font-size:0.8em; color:var(--text-muted);">Asset: VPN Gateway</span>
+                            </td>
+                            <td><span class="badge bg-high">HIGH</span></td>
+                            <td style="font-family:'Chakra Petch'; color:var(--warning); font-weight:700;">8.8</td>
+                            <td><span class="cost-tag">350 - 1,000 JOD</span></td>
+                            <td>
+                                <span style="color:var(--text-main);">Enforce MFA (Duo/Google Auth) for admins.</span>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                            <strong style="color:var(--brand-shield);">SQL Injection</strong><br>
-                            <span style="font-size:0.8em; color:var(--text-muted);">Asset: Web Portal</span>
-                        </td>
-                        <td><span class="badge bg-high">HIGH</span></td>
-                        <td style="font-family:'Chakra Petch'; color:var(--warning); font-weight:700;">8.1</td>
-                        <td><span class="cost-tag">1,400 - 3,500 JOD</span></td>
-                        <td>
-                            <span style="color:var(--text-main);">Use Prepared Statements. Install WAF.</span>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <strong style="color:var(--brand-shield);">SQL Injection</strong><br>
+                                <span style="font-size:0.8em; color:var(--text-muted);">Asset: Web Portal</span>
+                            </td>
+                            <td><span class="badge bg-high">HIGH</span></td>
+                            <td style="font-family:'Chakra Petch'; color:var(--warning); font-weight:700;">8.1</td>
+                            <td><span class="cost-tag">1,400 - 3,500 JOD</span></td>
+                            <td>
+                                <span style="color:var(--text-main);">Use Prepared Statements. Install WAF.</span>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                            <strong style="color:var(--brand-shield);">Missing Asset Tags</strong><br>
-                            <span style="font-size:0.8em; color:var(--text-muted);">Asset: Hardware</span>
-                        </td>
-                        <td><span class="badge bg-low">LOW</span></td>
-                        <td style="font-family:'Chakra Petch'; color:var(--success); font-weight:700;">3.5</td>
-                        <td><span class="cost-tag">140 - 350 JOD</span></td>
-                        <td>
-                            <span style="color:var(--text-main);">Barcode tagging for ISO 27001 compliance.</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        <tr>
+                            <td>
+                                <strong style="color:var(--brand-shield);">Missing Asset Tags</strong><br>
+                                <span style="font-size:0.8em; color:var(--text-muted);">Asset: Hardware</span>
+                            </td>
+                            <td><span class="badge bg-low">LOW</span></td>
+                            <td style="font-family:'Chakra Petch'; color:var(--success); font-weight:700;">3.5</td>
+                            <td><span class="cost-tag">140 - 350 JOD</span></td>
+                            <td>
+                                <span style="color:var(--text-main);">Barcode tagging for ISO 27001 compliance.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
