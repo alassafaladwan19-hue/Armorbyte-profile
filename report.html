@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArmorByte - Risk Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Chakra+Petch:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* --- ARMORBYTE BRAND PALETTE --- */
+            --brand-shield: #1864ab;   /* Royal Blue */
+            --brand-circuit: #4dabf7;  /* Cyan */
+            
+            /* Light Theme Backgrounds */
+            --bg-body: #f3f4f6;
+            --bg-panel: #ffffff;
+            --border-color: #e5e7eb;
+            
+            /* Text */
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            
+            /* Status Colors */
+            --danger: #dc2626;
+            --warning: #d97706;
+            --success: #059669;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        /* --- SIDEBAR --- */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .brand-logo {
+            width: 140px; 
+            height: auto;
+            display: flex;
+            align-items: center;
+        }
+        
+        .brand-logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* User Profile Section - Upper Left */
+        .user-profile {
+            padding: 15px 10px;
+            background-color: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .nav-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border-left: 3px solid transparent;
+            font-weight: 500;
+        }
+        .nav-item:hover {
+            background-color: #f9fafb;
+            color: var(--brand-shield);
+        }
+        .nav-item.active {
+            background-color: rgba(77, 171, 247, 0.1);
+            color: var(--brand-shield);
+            border-left: 3px solid var(--brand-circuit);
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content { padding: 30px; overflow-y: auto; }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        h1 { margin: 0; font-weight: 700; font-size: 1.8rem; letter-spacing: -0.5px; color: var(--brand-shield); }
+        .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-top: 5px; }
+
+        /* --- CARDS & CHARTS GRID --- */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--bg-panel);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        /* Top accent line */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--brand-shield), var(--brand-circuit));
+            border-radius: 12px 12px 0 0;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--brand-shield);
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* --- TABLE --- */
+        .table-container {
+            background: var(--bg-panel);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .table-header {
+            padding: 20px;
+            background: #f9fafb;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { 
+            background-color: #f3f4f6; 
+            color: var(--text-muted); 
+            font-weight: 600; 
+            text-align: left; 
+            padding: 15px 20px; 
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--border-color);
+        }
+        td { 
+            padding: 15px 20px; 
+            border-bottom: 1px solid var(--border-color); 
+            vertical-align: top; 
+            color: var(--text-main);
+        }
+        tr:hover td { background-color: #f9fafb; }
+
+        /* --- BADGES --- */
+        .badge { 
+            padding: 5px 10px; 
+            border-radius: 4px; 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            display: inline-block;
+        }
+        .bg-critical { background: rgba(220, 38, 38, 0.1); color: var(--danger); border: 1px solid rgba(220, 38, 38, 0.2); }
+        .bg-high { background: rgba(217, 119, 6, 0.1); color: var(--warning); border: 1px solid rgba(217, 119, 6, 0.2); }
+        .bg-medium { background: rgba(77, 171, 247, 0.1); color: var(--brand-circuit); border: 1px solid rgba(77, 171, 247, 0.2); }
+        .bg-low { background: rgba(5, 150, 105, 0.1); color: var(--success); border: 1px solid rgba(5, 150, 105, 0.2); }
+
+        .cost-tag {
+            font-family: 'Chakra Petch', monospace;
+            color: var(--brand-shield);
+            border: 1px solid var(--border-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            background: #f3f4f6;
+            font-weight: 600;
+        }
+
+        .mermaid { background: transparent; }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <div class="sidebar">
+            <a href="index.html" style="color: #6b7280; text-decoration: none; font-size: 0.8rem; margin-bottom: 15px; display: block;">&larr; Back to Home</a>
+        <div class="brand-container">
+            <div class="brand-logo">
+                <img src="logo of armorbyte.png" alt="ArmorByte Logo">
+            </div>
+        </div>
+        
+        <div class="user-profile">
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0; text-transform: uppercase; letter-spacing: 1px;">Lead Auditor</p>
+            <p style="font-size: 1.1rem; color: var(--brand-shield); font-weight: 700; margin: 5px 0 0 0;">Amer Al-Assaf</p>
+        </div>
+
+        <div style="margin-bottom: 30px; padding-left: 10px;">
+            <p style="color:var(--text-main); margin:0; font-weight:700;">Client Name :00000</p>
+        </div>
+
+        <div class="nav-item active">Risk Dashboard</div>
+        
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div>
+                <h1>Risk Assessment Overview</h1>
+                <div class="subtitle">Security Posture & Budget Estimation (JOD)</div>
+            </div>
+            <div>
+                <span class="badge bg-critical" style="font-size: 0.9rem; padding: 10px 20px;">
+                    POSTURE: CRITICAL
+                </span>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="card">
+                <h3>Vulnerability Breakdown</h3>
+                <div style="position: relative; height: 200px; width: 100%;">
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Technical Risk Score (CVSS)</h3>
+                <div style="position: relative; height: 200px; width: 100%;">
+                    <canvas id="riskChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Estimated Mitigation Cost (JOD)</h3>
+                <div style="position: relative; height: 200px; width: 100%;">
+                    <canvas id="costChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Remediation Logic</h3>
+                <div class="mermaid">
+                    %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e5e7eb', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#f3f4f6', 'lineColor': '#6b7280', 'textColor': '#111827'}}}%%
+                    graph TD
+                    A[Start Audit] --> B{Vuln Found?}
+                    B -->|Yes| C[Classify Risk]
+                    C -->|Critical| D[Immediate Patch]
+                    C -->|Low| E[Monitor]
+                    D --> F[Verify & Close]
+                    E --> F
+                    style C fill:#4dabf7,stroke:#1864ab,color:white
+                    style D fill:#dc2626,stroke:#991b1b,color:white
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header">
+                <h3 style="margin:0; color:var(--brand-shield); font-size:1.1rem;">Detailed Findings</h3>
+                <span style="font-family:'Chakra Petch'; font-size:0.9rem; color:var(--text-muted); font-weight:600;">5 Items</span>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th width="25%">VULNERABILITY</th>
+                        <th width="10%">SEVERITY</th>
+                        <th width="10%">CVSS</th>
+                        <th width="15%">COST (JOD)</th>
+                        <th width="40%">MITIGATION STRATEGY</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong style="color:var(--brand-shield);">SMBv1 (EternalBlue)</strong><br>
+                            <span style="font-size:0.8em; color:var(--text-muted);">Asset: Core Server</span>
+                        </td>
+                        <td><span class="badge bg-critical">CRITICAL</span></td>
+                        <td style="font-family:'Chakra Petch'; color:var(--danger); font-weight:700;">9.8</td>
+                        <td><span class="cost-tag">0 - 140 JOD</span></td>
+                        <td>
+                            <span style="color:var(--text-main);">Apply MS17-010 patch. Block port 445.</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <strong style="color:var(--brand-shield);">Weak Wi-Fi (PSK)</strong><br>
+                            <span style="font-size:0.8em; color:var(--text-muted);">Asset: Staff WLAN</span>
+                        </td>
+                        <td><span class="badge bg-medium">MEDIUM</span></td>
+                        <td style="font-family:'Chakra Petch'; color:var(--brand-circuit); font-weight:700;">6.5</td>
+                        <td><span class="cost-tag">700 - 1,800 JOD</span></td>
+                        <td>
+                            <span style="color:var(--text-main);">Migrate to WPA2-Enterprise with RADIUS.</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <strong style="color:var(--brand-shield);">No MFA on Admin</strong><br>
+                            <span style="font-size:0.8em; color:var(--text-muted);">Asset: VPN Gateway</span>
+                        </td>
+                        <td><span class="badge bg-high">HIGH</span></td>
+                        <td style="font-family:'Chakra Petch'; color:var(--warning); font-weight:700;">8.8</td>
+                        <td><span class="cost-tag">350 - 1,000 JOD</span></td>
+                        <td>
+                            <span style="color:var(--text-main);">Enforce MFA (Duo/Google Auth) for admins.</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <strong style="color:var(--brand-shield);">SQL Injection</strong><br>
+                            <span style="font-size:0.8em; color:var(--text-muted);">Asset: Web Portal</span>
+                        </td>
+                        <td><span class="badge bg-high">HIGH</span></td>
+                        <td style="font-family:'Chakra Petch'; color:var(--warning); font-weight:700;">8.1</td>
+                        <td><span class="cost-tag">1,400 - 3,500 JOD</span></td>
+                        <td>
+                            <span style="color:var(--text-main);">Use Prepared Statements. Install WAF.</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <strong style="color:var(--brand-shield);">Missing Asset Tags</strong><br>
+                            <span style="font-size:0.8em; color:var(--text-muted);">Asset: Hardware</span>
+                        </td>
+                        <td><span class="badge bg-low">LOW</span></td>
+                        <td style="font-family:'Chakra Petch'; color:var(--success); font-weight:700;">3.5</td>
+                        <td><span class="cost-tag">140 - 350 JOD</span></td>
+                        <td>
+                            <span style="color:var(--text-main);">Barcode tagging for ISO 27001 compliance.</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Global Chart Defaults
+    Chart.defaults.color = '#6b7280';
+    Chart.defaults.borderColor = '#e5e7eb';
+    Chart.defaults.font.family = "'Inter', sans-serif";
+
+    // 1. Mermaid Initialization
+    mermaid.initialize({startOnLoad:true});
+
+    // 2. Doughnut Chart
+    const ctxDoughnut = document.getElementById('doughnutChart').getContext('2d');
+    new Chart(ctxDoughnut, {
+        type: 'doughnut',
+        data: {
+            labels: ['Critical', 'High', 'Medium', 'Low'],
+            datasets: [{
+                data: [1, 2, 1, 1],
+                backgroundColor: ['#dc2626', '#d97706', '#4dabf7', '#059669'],
+                borderWidth: 2,
+                borderColor: '#ffffff',
+                hoverOffset: 10
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: { 
+                legend: { position: 'right', labels: { usePointStyle: true, font: {weight: '500'} } } 
+            },
+            cutout: '75%'
+        }
+    });
+
+    // 3. Risk Chart (Bar Chart)
+    const ctxRisk = document.getElementById('riskChart').getContext('2d');
+    new Chart(ctxRisk, {
+        type: 'bar',
+        data: {
+            labels: ['SMB Patch', 'Wi-Fi Upg', 'MFA Impl', 'SQLi Fix', 'Asset Tag'],
+            datasets: [{
+                label: 'CVSS Score',
+                data: [9.8, 6.5, 8.8, 8.1, 3.5],
+                backgroundColor: 'rgba(24, 100, 171, 0.8)', // Shield Blue
+                borderColor: '#1864ab', 
+                borderWidth: 1,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                y: { 
+                    beginAtZero: true, 
+                    max: 10,
+                    title: {display: true, text: 'Score (0-10)'} 
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // 4. Cost Chart (Bar Chart) - SEPARATED
+    const ctxCost = document.getElementById('costChart').getContext('2d');
+    new Chart(ctxCost, {
+        type: 'bar',
+        data: {
+            labels: ['SMB Patch', 'Wi-Fi Upg', 'MFA Impl', 'SQLi Fix', 'Asset Tag'],
+            datasets: [{
+                label: 'Est. Cost (JOD)',
+                data: [70, 1200, 700, 2500, 250], 
+                backgroundColor: 'rgba(77, 171, 247, 0.6)', // Circuit Cyan
+                borderColor: '#4dabf7', 
+                borderWidth: 1,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                y: { 
+                    beginAtZero: true, 
+                    title: {display: true, text: 'Cost (JOD)'} 
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
